@@ -1,0 +1,207 @@
+/* ============================================================
+   BENJAMIN SOARES DESIGN SYSTEM — CHIC MIDNIGHT NAVY EDITION
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* REFINED PALETTE: LUXURY OBSIDIAN NAVY & POLISHED PLATINUM */
+  --color--bg-dark: #060810;                /* Preto azulado profundo / Obsidian */
+  --color--bg-surface: #0b1122;             /* Superfície elegante */
+  --color--bg-elevated: #101932;            /* Painéis e cards */
+  --color--bg-glass: rgba(11, 17, 34, 0.78);/* Glassmorphism discreto */
+  
+  /* ACCENT TOKENS (Sóbrio, Chic, Sem Neon) */
+  --color--accent-pure: #ffffff;            /* Branco puro de alto contraste */
+  --color--accent-platinum: #e2e8f0;        /* Platina acetinada */
+  --color--accent-silver: #cbd5e1;          /* Prata metálica fosca */
+  --color--accent-subtle: #475569;          /* Cinza escuro estrutural */
+
+  /* BORDERS (Finas, sofisticadas, sem azul claro berrante) */
+  --color--border-subtle: rgba(255, 255, 255, 0.08);
+  --color--border-hover: rgba(255, 255, 255, 0.28);
+  --color--border-card: rgba(255, 255, 255, 0.07);
+
+  /* TYPOGRAPHY COLORS */
+  --color--text-primary: #ffffff;
+  --color--text-secondary: #94a3b8;
+  --color--text-muted: #64748b;
+
+  /* CHIC BALANCED TYPOGRAPHY TOKENS (Outfit + Plus Jakarta Sans) */
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* MOTION & CURVES */
+  --cubic-default: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-default: 0.65s;
+  --animation-default: var(--duration-default) var(--cubic-default);
+
+  /* SPACING */
+  --gap: 1.5rem;
+  --container-padding: 2.5rem;
+  --nav-height: 4.8rem;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --container-padding: 1.5rem;
+    --nav-height: 4.2rem;
+  }
+}
+
+/* RESET & BASE */
+*, *:before, *:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--color--bg-dark);
+  color: var(--color--text-primary);
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: transparent;
+  color: var(--color--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* TYPOGRAPHY */
+.font-display { font-family: var(--font-display); }
+.font-body { font-family: var(--font-body); }
+
+.text-impact-xl {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 5vw, 4.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+.text-chic-accent {
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.text-title-lg {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3.2vw, 2.7rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+.text-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.text-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(1rem, 1.15vw, 1.18rem);
+  line-height: 1.65;
+  color: var(--color--text-secondary);
+  letter-spacing: -0.01em;
+}
+
+/* CONTAINER */
+.c-container {
+  width: 100%;
+  max-width: 1540px;
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+/* CHIC BUTTONS (.btn-w) */
+.btn-w {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+  padding: 0.8rem 1.8rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-w:hover {
+  transform: translateY(-2px);
+}
+
+/* Primary Button (White / Platinum Chic) */
+.btn-w[data-theme="chic-white"] {
+  background-color: #ffffff;
+  color: #060810;
+  border-color: #ffffff;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+}
+
+.btn-w[data-theme="chic-white"]:hover {
+  background-color: #f1f5f9;
+  box-shadow: 0 6px 30px rgba(255, 255, 255, 0.28);
+}
+
+/* Secondary Button (Glass & Hairline) */
+.btn-w[data-theme="chic-glass"] {
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+}
+
+.btn-w[data-theme="chic-glass"]:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.btn-icon-svg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  transition: transform 0.3s ease;
+}
+
+.btn-w:hover .btn-icon-svg {
+  transform: translateX(4px);
+}

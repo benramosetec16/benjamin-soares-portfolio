@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Benjamin Soares — Desenvolvedor, Scrum Master &amp; Palestrante</title>
+  <meta name="description"
+    content="Portfólio de Benjamin Soares: Desenvolvedor e Scrum Master da startup de saúde mental pelo Método Copenhagen, estudante da ETEC MAS, medalhista da OBA e OBM.">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/portfolio.css">
+</head>
+
+<body>
+
+  <!-- SCROLL-DRIVEN VIDEO BACKGROUND (GOOGLE FLOW ENGINE) -->
+  <div class="video-bg-container">
+    <video id="flowVideo" muted playsinline preload="auto">
+      <source src="assets/video/Boy_turning_and_smiling_f85f85f6.mp4" type="video/mp4">
+      <source src="assets/video/hero.mp4" type="video/mp4">
+      Seu navegador não suporta vídeos HTML5.
+    </video>
+    <canvas id="techMeshCanvas"></canvas>
+  </div>
+  <div class="video-overlay-gradient"></div>
+
+  <!-- ETEC MAS BACKGROUND LAYER (SURGE SUAVEMENTE DEPOIS QUE O VÍDEO FAZ FADE-OUT) -->
+  <div class="etec-bg-container">
+    <img src="assets/img/etec-mas-predio.jpg" alt="Fachada ETEC Dra. Maria Augusta Saraiva" class="etec-bg-image">
+    <div class="etec-bg-overlay"></div>
+  </div>
+
+
+
+  <!-- DRAG & DROP OVERLAY -->
+  <div class="video-drop-overlay" id="dropOverlay">
+    <div class="drop-box">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="17 8 12 3 7 8"></polyline>
+        <line x1="12" y1="3" x2="12" y2="15"></line>
+      </svg>
+      <span style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 700;">SOLTE O VÍDEO AQUI</span>
+      <span style="font-size: 0.88rem; color: var(--color--text-secondary);">Formatos compatíveis: .mp4, .webm,
+        .mov</span>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="nav-wrap">
+    <div class="c-container nav-inner">
+      <a href="#hero" class="nav-brand" title="Benjamin Soares">
+        <div class="brand-text">
+          <span class="brand-title">Benjamin Soares</span>
+          <span class="brand-sub">Desenvolvedor &amp; Scrum Master</span>
+        </div>
+      </a>
+
+      <!-- Center Monogram -->
+      <div class="nav-center-badge">
+        <a href="#hero" class="badge-logo" title="BS Monogram">BS</a>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#sobre" class="nav-link">Sobre</a>
+        <a href="#etec" class="nav-link">ETEC MAS</a>
+        <a href="#galeria" class="nav-link">Galeria</a>
+        <a href="#solucoes" class="nav-link">Soluções</a>
+        <a href="#metodo" class="nav-link">Método Copenhagen</a>
+        <a href="#off-track" class="nav-link">Off-Track</a>
+        <a href="#palestras" class="nav-link">Palestras</a>
+        <a href="#contato" class="nav-link">Contato</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="nav-ham" aria-label="Abrir Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero-section">
+      <div class="c-container hero-layout">
+        <div class="hero-main">
+          <div class="hero-eyebrow-wrap">
+            <span class="text-eyebrow">01 // VISÃO GERAL</span>
+            <span class="tag-badge">Método Copenhagen Pioneer</span>
+          </div>
+
+          <div class="hero-headline">
+            <h1 class="text-impact-xl">
+              CÓDIGO COM
+              <span class="text-chic-accent">Propósito</span>
+            </h1>
+            <h1 class="text-impact-xl">
+              E ALTA PERFORMANCE.
+            </h1>
+          </div>
+
+          <p class="text-body" style="max-width: 44rem;">
+            <strong>Benjamin Soares</strong>, 15 anos. Desenvolvedor de sistemas e <strong>Scrum Master</strong>. Cofundador da primeira startup
+            estudantil de conscientização e <strong>saúde mental</strong> fundamentada no rigoroso <strong>Método Copenhagen</strong>.
+            Estudante de <strong>Desenvolvimento de Sistemas</strong> na <strong>ETEC MAS</strong> e medalhista da <strong>OBA</strong> e
+            <strong>OBM</strong>.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#solucoes" class="btn-w" data-theme="chic-white" data-anim="text-hover">
+              <span class="btn-inner">
+                <span class="btn-text">Explorar Soluções</span>
+                <span class="btn-icon-svg">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                </span>
+              </span>
+            </a>
+            <a href="#palestras" class="btn-w" data-theme="chic-glass" data-anim="text-hover">
+              <span class="btn-inner">
+                <span class="btn-text">Contratar Palestra</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- TELEMETRY STATS CARD -->
+        <aside class="hero-telemetry-card" id="sobre">
+          <div class="telemetry-header">
+            <span class="telemetry-title">TELEMETRIA // BENJAMIN SOARES</span>
+            <div class="telemetry-status">
+              <span class="video-pulse-dot"></span>
+              <span>Disponível</span>
+            </div>
+          </div>
+
+          <div class="telemetry-rows">
+            <div class="telemetry-row">
+              <span class="telemetry-label">Perfil &amp; Atuação</span>
+              <span class="telemetry-val">15 Anos // Dev &amp; Scrum Master</span>
+            </div>
+            <div class="telemetry-row">
+              <span class="telemetry-label">Formação Técnica</span>
+              <span class="telemetry-val">ETEC MAS (Desenv. de Sistemas)</span>
+            </div>
+            <div class="telemetry-row">
+              <span class="telemetry-label">Startup Destaque</span>
+              <span class="telemetry-val highlight">Saúde Mental (Método Copenhagen)</span>
+            </div>
+            <div class="telemetry-row">
+              <span class="telemetry-label">Reconhecimentos Nacionais</span>
+              <span class="telemetry-val">Medalhista OBA &amp; OBM</span>
+            </div>
+            <div class="telemetry-row">
+              <span class="telemetry-label">Foco Profissional</span>
+              <span class="telemetry-val">Sistemas Autônomos &amp; Palestras</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- MANIFESTO / STATEMENT SECTION -->
+    <section class="statement-section">
+      <div class="c-container statement-content">
+        <span class="text-eyebrow">02 // MANIFESTO &amp; PRINCÍPIO</span>
+
+        <blockquote class="statement-quote interactive-text">
+          “Equilibrar a precisão analítica da <span class="text-chic-accent">engenharia de software</span> com a
+          sensibilidade urgente do <span class="text-chic-accent">cuidado humano</span>: criar tecnologia que previne,
+          conscientiza e transforma realidades em escolas e organizações.”
+        </blockquote>
+
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.35rem;">
+          <span
+            style="font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.95rem; color: #ffffff;">Benjamin
+            Soares</span>
+          <span
+            style="font-size: 0.76rem; color: var(--color--text-muted); text-transform: uppercase; letter-spacing: 0.12em;">Liderança
+            Ágil &amp; Tecnologia de Impacto</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ETEC MAS INSTITUTIONAL HIGHLIGHT -->
+    <section id="etec" class="etec-highlight-section">
+      <div class="c-container">
+        <div class="etec-highlight-box">
+          <div class="etec-highlight-media">
+            <img src="assets/img/etec-mas-predio.jpg" alt="Fachada da ETEC Dra. Maria Augusta Saraiva" loading="lazy">
+            <div class="etec-media-badge">ETEC MAS // BERÇO DE FORMAÇÃO</div>
+          </div>
+          <div class="etec-highlight-content">
+            <div class="etec-eyebrow-wrap">
+              <span class="text-eyebrow">03 // BASE INSTITUCIONAL &amp; ORIGEM</span>
+              <span class="tag-badge">São Paulo // ETEC MAS</span>
+            </div>
+            <h2 class="text-title-lg" style="margin-top: 0.6rem; margin-bottom: 1.2rem;">
+              ONDE A TRAJETÓRIA <span class="text-chic-accent">GANHOU FORMA.</span>
+            </h2>
+            <p class="text-body" style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.2rem;">
+              A <strong>ETEC Dra. Maria Augusta Saraiva (ETEC MAS)</strong> é a instituição fundamental onde
+              <strong>Benjamin Soares</strong> construiu sua base técnica em <strong>Desenvolvimento de Sistemas</strong>.
+              Com a mentoria e incentivo acadêmico do professor <strong>Rafael Diogo Rossetti</strong>, Benjamin desenvolveu
+              rigor em engenharia de software e maturidade metodológica para assumir o papel de <strong>Scrum Master</strong>,
+              liderando sua equipe na fundação da <strong>primeira startup estudantil de conscientização e intervenção preventiva
+              em saúde mental fundamentada no rigoroso Método Copenhagen</strong>.
+            </p>
+            <div class="etec-badges-row">
+              <div class="etec-pill">
+                <span class="pill-dot"></span>
+                <span><strong>Formação Técnica:</strong> Desenvolvimento de Sistemas (ETEC MAS)</span>
+              </div>
+              <div class="etec-pill">
+                <span class="pill-dot"></span>
+                <span><strong>Mentoria &amp; Docência:</strong> Orientação técnica e acadêmica do Prof. Rafael Diogo Rossetti</span>
+              </div>
+              <div class="etec-pill">
+                <span class="pill-dot"></span>
+                <span><strong>Liderança Ágil:</strong> Atuação como Scrum Master na criação da Startup no Método Copenhagen</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERIA EDITORIAL DE FOTOS (ESTILO LANDO NORRIS CAPTIONED PHOTO) -->
+    <section id="galeria" class="editorial-gallery-section">
+      <div class="c-container">
+        <div class="section-head-layout">
+          <div>
+            <span class="text-eyebrow">04 // GALERIA &amp; PERSPECTIVA</span>
+            <h2 class="text-title-lg">
+              STARTUP, <span class="text-chic-accent">MÉTODO &amp; FOCO</span>
+            </h2>
+          </div>
+          <p class="text-body">
+            Momentos reais da jornada: da liderança da equipe pioneira de saúde mental ao ambiente de desenvolvimento e
+            expressão pessoal.
+          </p>
+        </div>
+
+        <div class="gallery-bento-grid">
+          <!-- CARD 1: FOTO DESTAQUE (EQUIPE DA STARTUP NO PALCO) -->
+          <article class="gallery-photo-card is-featured">
+            <div class="gallery-img-wrap">
+              <img src="assets/img/startup-equipe-copenhagen.png"
+                alt="Benjamin Soares e a equipe pioneira da startup de saúde mental no palco" loading="lazy">
+            </div>
+            <div class="gallery-overlay-gradient"></div>
+            <div class="gallery-content-wrap">
+              <span class="gallery-eyebrow">01 // EQUIPE PIONEIRA // STARTUP</span>
+              <h3 class="gallery-title">A Primeira Startup no Método Copenhagen</h3>
+              <p class="gallery-desc">
+                <strong>Benjamin Soares</strong> como <strong>Scrum Master</strong> liderando o grupo pioneiro da <strong>ETEC MAS</strong> que estruturou intervenções
+                preventivas em <strong>saúde mental</strong> pelo <strong>Método Copenhagen</strong>.
+              </p>
+            </div>
+          </article>
+
+          <!-- COLUNA LATERAL COM 3 FOTOS -->
+          <div class="gallery-side-col">
+            <!-- CARD 2: COWORKING / LAB DE SISTEMAS -->
+            <article class="gallery-photo-card" style="min-height: 280px;">
+              <div class="gallery-img-wrap">
+                <img src="assets/img/coworking-lab-sistemas.webp"
+                  alt="Espaço de desenvolvimento e laboratório de sistemas" loading="lazy">
+              </div>
+              <div class="gallery-overlay-gradient"></div>
+              <div class="gallery-content-wrap">
+                <span class="gallery-eyebrow">02 // LABORATÓRIO &amp; WORKSPACE</span>
+                <h3 class="gallery-title">Ambiente de Criação &amp; Sprints</h3>
+                <p class="gallery-desc">
+                  Estruturação técnica de sistemas e práticas ágeis focadas em alta performance.
+                </p>
+              </div>
+            </article>
+
+            <!-- SPLIT ROW: OFF-TRACK + F1 -->
+            <div class="gallery-split-row">
+              <!-- CARD 3: PALESTRA & PITCH -->
+              <article class="gallery-photo-card">
+                <div class="gallery-img-wrap">
+                  <img src="assets/img/benjamin-palestra-pitch.jpg"
+                    alt="Benjamin Soares apresentando o pitch da startup" loading="lazy">
+                </div>
+                <div class="gallery-overlay-gradient"></div>
+                <div class="gallery-content-wrap">
+                  <span class="gallery-eyebrow">03 // PALESTRA & PITCH</span>
+                  <h3 class="gallery-title" style="font-size: 1.25rem;">Apresentação do Projeto</h3>
+                  <p class="gallery-desc" style="font-size: 0.82rem;">
+                    Pitch da startup de saúde mental desenvolvida pelo Método Copenhagen.
+                  </p>
+                </div>
+              </article>
+
+              <!-- CARD 4: LIDERANÇA & COMUNICAÇÃO -->
+              <article class="gallery-photo-card">
+                <div class="gallery-img-wrap">
+                  <img src="assets/img/benjamin-palestra-publico.jpg"
+                    alt="Benjamin Soares apresentando para a audiência" loading="lazy">
+                </div>
+                <div class="gallery-overlay-gradient"></div>
+                <div class="gallery-content-wrap">
+                  <span class="gallery-eyebrow">04 // LIDERANÇA & COMUNICAÇÃO</span>
+                  <h3 class="gallery-title" style="font-size: 1.25rem;">Liderança em Sala</h3>
+                  <p class="gallery-desc" style="font-size: 0.82rem;">
+                    Comunicando visão e estratégia para a equipe e investidores.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLUÇÕES E INOVAÇÃO — CARDS QUE SE SEPARAM AO PASSAR O MOUSE (FANNED CARDS) -->
+    <section id="solucoes" class="cards-fan-section">
+      <div class="c-container">
+        <div class="section-head-layout">
+          <div>
+            <span class="text-eyebrow">05 // SOLUÇÕES &amp; INOVAÇÃO</span>
+            <h2 class="text-title-lg">
+              ARQUITETURA <span class="text-chic-accent">&amp; IMPACTO</span>
+            </h2>
+          </div>
+          <p class="text-body">
+            Passe o mouse sobre os cards para expandir o acervo de projetos e soluções desenvolvidas com rigor técnico e
+            foco social.
+          </p>
+        </div>
+
+        <!-- FANNED CARDS WRAPPER (Os cards se separam no hover) -->
+        <div class="cards-fan-wrapper" title="Passe o mouse para abrir os cards">
+
+          <!-- CARD 1: STARTUP MÉTODO COPENHAGEN -->
+          <article class="fan-card" data-index="1">
+            <div class="card-top">
+              <span class="card-index-tag">01 // STARTUP PIONEIRA</span>
+              <h3 class="card-title">Saúde Mental Copenhagen</h3>
+              <p class="card-desc">
+                Cofundador e Scrum Master da primeira startup escolar de conscientização e intervenção preventiva em
+                saúde mental fundamentada no Método Copenhagen, oferecendo mapeamento e suporte humanizado para jovens e
+                instituições.
+              </p>
+            </div>
+            <div class="card-bottom">
+              <span>Scrum Master</span>
+              <span style="color: #ffffff; font-weight: 600;">2025 – PRESENTE</span>
+            </div>
+          </article>
+
+          <!-- CARD 2: ETEC MAS SISTEMAS WEB -->
+          <article class="fan-card" data-index="2">
+            <div class="card-top">
+              <span class="card-index-tag">02 // ENGENHARIA DE SOFTWARE</span>
+              <h3 class="card-title">Sistemas Web &amp; Automação</h3>
+              <p class="card-desc">
+                Desenvolvimento full stack na ETEC MAS: modelagem de bancos de dados relacionais, criação de
+                microsserviços, APIs RESTful e interfaces modernas voltadas a otimizar processos acadêmicos e
+                operacionais.
+              </p>
+            </div>
+            <div class="card-bottom">
+              <span>ETEC MAS</span>
+              <span style="color: #ffffff; font-weight: 600;">FULL STACK</span>
+            </div>
+          </article>
+
+          <!-- CARD 3: OLIMPÍADAS OBM & OBA -->
+          <article class="fan-card" data-index="3">
+            <div class="card-top">
+              <span class="card-index-tag">03 // RACIOCÍNIO ANALÍTICO</span>
+              <h3 class="card-title">Lógica Olímpica OBM &amp; OBA</h3>
+              <p class="card-desc">
+                Medalhista na Olimpíada Brasileira de Astronomia e na Olimpíada Brasileira de Matemática. Resolução de
+                algoritmos complexos, abstração quantitativa e pensamento analítico de alta velocidade.
+              </p>
+            </div>
+            <div class="card-bottom">
+              <span>OBA &amp; OBM</span>
+              <span style="color: #ffffff; font-weight: 600;">MEDALHISTA</span>
+            </div>
+          </article>
+
+          <!-- CARD 4: CICLO DE PALESTRAS -->
+          <article class="fan-card" data-index="4">
+            <div class="card-top">
+              <span class="card-index-tag">04 // EDUCAÇÃO &amp; PREVENÇÃO</span>
+              <h3 class="card-title">Palestras &amp; Conscientização</h3>
+              <p class="card-desc">
+                Encontros dinâmicos em escolas e empresas: desmistificando a saúde mental com respaldo científico,
+                acolhimento de jovens e adultos e ferramentas práticas de prevenção à sobrecarga emocional.
+              </p>
+            </div>
+            <div class="card-bottom">
+              <span>Instituições &amp; Empresas</span>
+              <span style="color: #ffffff; font-weight: 600;">PALESTRANTE</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- MÉTODO COPENHAGEN — HORIZONTAL SCROLL ON VERTICAL SCROLL -->
+    <section id="metodo" class="copenhagen-scroll-section">
+      <div class="copenhagen-sticky-wrapper">
+        <div class="copenhagen-header-box">
+          <div class="section-head-layout" style="margin-bottom: 0;">
+            <div>
+              <span class="text-eyebrow">06 // RIGOR CIENTÍFICO</span>
+              <h2 class="text-title-lg">
+                MÉTODO COPENHAGEN <span class="text-chic-accent">&amp; AGILIDADE</span>
+              </h2>
+            </div>
+            <div class="copenhagen-status-wrap">
+              <p class="text-body" style="font-size: 0.95rem; text-align: right;">
+                Role verticalmente para explorar os pilares da metodologia psicossocial e liderança ágil.
+              </p>
+              <div class="copenhagen-progress-bar">
+                <div id="copenhagenProgress" class="copenhagen-progress-fill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TRACK HORIZONTAL QUE DESLIZA PRO LADO -->
+        <div class="copenhagen-track">
+
+          <!-- CARD 1 -->
+          <article class="copenhagen-card">
+            <div class="c-card-top">
+              <span class="c-card-num">01</span>
+              <span class="c-card-badge">Diagnóstico Científico</span>
+            </div>
+            <div>
+              <h3 class="c-card-title">Mapeamento Psicossocial Rigoroso</h3>
+              <p class="c-card-desc" style="margin-top: 1rem;">
+                Aplicação dos critérios validados internacionalmente da escala de Copenhague para mapear preventivamente
+                fatores de risco psicossocial, sobrecarga cognitiva e desgaste emocional em jovens e equipes de
+                trabalho.
+              </p>
+            </div>
+            <div class="c-card-meta">
+              <span>Escala COPSOQ</span>
+              <span>Prevenção Primária</span>
+            </div>
+          </article>
+
+          <!-- CARD 2 -->
+          <article class="copenhagen-card">
+            <div class="c-card-top">
+              <span class="c-card-num">02</span>
+              <span class="c-card-badge">Cultura de Cuidado</span>
+            </div>
+            <div>
+              <h3 class="c-card-title">Intervenção Preventiva &amp; Segura</h3>
+              <p class="c-card-desc" style="margin-top: 1rem;">
+                Transformação de diagnósticos em ações práticas de acolhimento e escuta qualificada, quebrando tabus em
+                ambientes escolares e corporativos por meio de diálogo humanizado e fundamentado.
+              </p>
+            </div>
+            <div class="c-card-meta">
+              <span>Acolhimento Ativo</span>
+              <span>Ambiente Seguro</span>
+            </div>
+          </article>
+
+          <!-- CARD 3 -->
+          <article class="copenhagen-card">
+            <div class="c-card-top">
+              <span class="c-card-num">03</span>
+              <span class="c-card-badge">Liderança Ágil</span>
+            </div>
+            <div>
+              <h3 class="c-card-title">Scrum Master Facilitador</h3>
+              <p class="c-card-desc" style="margin-top: 1rem;">
+                Coordenação de sprints ágeis, alinhamento de prioridades e facilitação de rituais com foco nas pessoas,
+                unindo velocidade de entrega e sensibilidade humana aos 15 anos de idade.
+              </p>
+            </div>
+            <div class="c-card-meta">
+              <span>Framework Scrum</span>
+              <span>Liderança Servidora</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ON-CODE / OFF-TRACK (UNIVERSO PESSOAL — SEM EMOJIS, CHIC) -->
+    <section id="off-track" style="padding-top: 10rem;">
+      <div class="c-container">
+        <div class="section-head-layout">
+          <div>
+            <span class="text-eyebrow">07 // UNIVERSO PESSOAL</span>
+            <h2 class="text-title-lg">
+              ON-CODE <span class="text-chic-accent">/ OFF-TRACK</span>
+            </h2>
+          </div>
+          <p class="text-body">
+            O equilíbrio entre o rigor da engenharia de software e a paixão pela velocidade milimétrica, rítmica
+            instrumental e pensamento tático.
+          </p>
+        </div>
+
+        <div class="split-cards">
+          <!-- ON-CODE -->
+          <div class="split-card">
+            <div
+              style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--color--border-subtle); padding-bottom: 1.2rem;">
+              <h3
+                style="font-family: var(--font-display); font-weight: 700; font-size: 1.35rem; text-transform: uppercase;">
+                ON-CODE // DISCIPLINA TÉCNICA</h3>
+              <span
+                style="font-family: var(--font-body); font-weight: 600; font-size: 0.8rem; color: var(--color--text-muted);">01</span>
+            </div>
+
+            <div class="split-items">
+              <div class="split-item">
+                <span class="clean-index">01</span>
+                <div class="split-item-content">
+                  <h4>Engenharia de Sistemas</h4>
+                  <p>Estruturação de bancos de dados relacionais, microsserviços e arquitetura de software na ETEC MAS.
+                  </p>
+                </div>
+              </div>
+
+              <div class="split-item">
+                <span class="clean-index">02</span>
+                <div class="split-item-content">
+                  <h4>Gestão Ágil &amp; Scrum</h4>
+                  <p>Facilitação de sprints semanais, refinamento de backlog e alinhamento contínuo de entregas com foco
+                    humano.</p>
+                </div>
+              </div>
+
+              <div class="split-item">
+                <span class="clean-index">03</span>
+                <div class="split-item-content">
+                  <h4>Lógica e Modelagem Quantitativa</h4>
+                  <p>Capacidade analítica rigorosa comprovada com premiações nacionais na OBM e OBA.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- OFF-TRACK -->
+          <div class="split-card">
+            <div
+              style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--color--border-subtle); padding-bottom: 1.2rem;">
+              <h3
+                style="font-family: var(--font-display); font-weight: 700; font-size: 1.35rem; text-transform: uppercase;">
+                OFF-TRACK // PAIXÕES</h3>
+              <span
+                style="font-family: var(--font-body); font-weight: 600; font-size: 0.8rem; color: var(--color--text-muted);">02</span>
+            </div>
+
+            <div class="split-items">
+              <div class="split-item">
+                <span class="clean-index">01</span>
+                <div class="split-item-content">
+                  <h4>Rock &amp; Instrumentos de Corda</h4>
+                  <p>Guitarra e violão como exercício de precisão motora, disciplina rítmica e expressão autêntica.</p>
+                </div>
+              </div>
+
+              <div class="split-item">
+                <span class="clean-index">02</span>
+                <div class="split-item-content">
+                  <h4>Fórmula 1 &amp; Alta Velocidade</h4>
+                  <p>Estudo de telemetria, estratégias de corrida em frações de segundo e tomada de decisão sob pressão
+                    extrema.</p>
+                </div>
+              </div>
+
+              <div class="split-item">
+                <span class="clean-index">03</span>
+                <div class="split-item-content">
+                  <h4>Jogos Estratégicos &amp; Leitura Contínua</h4>
+                  <p>Pensamento sistêmico através de universos imersivos e constante expansão do repertório cultural e
+                    filosófico.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PALESTRAS & CONTATO -->
+    <section id="palestras">
+      <div class="c-container">
+
+        <!-- FRASE DE EFEITO -->
+        <div class="contact-headline-wrap">
+          <h2 class="contact-tagline interactive-text">
+            Não tente fazer ligação<br>
+            para um desenvolvedor<span class="contact-tagline-accent"> fora de área.</span>
+          </h2>
+          <p class="contact-tagline-sub interactive-text">Contate-nos.</p>
+        </div>
+
+        <div class="cta-box">
+          <div>
+            <span class="text-eyebrow">08 // CONTATO &amp; OPORTUNIDADES</span>
+            <h2 class="text-title-lg" style="margin-top: 0.8rem; margin-bottom: 1rem;">
+              VAMOS CONSTRUIR <span class="text-chic-accent">O FUTURO JUNTOS?</span>
+            </h2>
+            <p class="text-body" style="max-width: 38rem;">
+              Disponível para <strong>desenvolvimento autônomo de sistemas sob medida</strong> e para <strong>palestras
+                de conscientização e saúde mental</strong> em instituições de ensino, faculdades e empresas.
+            </p>
+          </div>
+
+          <div class="contact-info-panel" id="contato">
+            <!-- ITEM EMAIL -->
+            <div class="contact-info-card">
+              <span class="contact-info-label">E-mail Direto</span>
+              <a href="mailto:rafasss160@gmail.com" class="contact-info-val" title="Clique para enviar um e-mail">
+                rafasss160@gmail.com
+              </a>
+            </div>
+
+            <!-- ITEM WHATSAPP / TELEFONE -->
+            <div class="contact-info-card">
+              <span class="contact-info-label">WhatsApp &amp; Telefone</span>
+              <a href="https://wa.me/5511977164653" target="_blank" class="contact-info-val" title="Clique para conversar no WhatsApp">
+                +55 (11) 97716-4653
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="c-container">
+      <div class="footer-layout">
+        <div>
+          <span class="brand-title" style="font-size: 1.45rem;">BENJAMIN SOARES</span>
+          <p class="text-body" style="font-size: 0.92rem; max-width: 25rem; margin-top: 0.9rem;">
+            Desenvolvedor de Sistemas, Scrum Master e Palestrante de Saúde Mental pelo Método Copenhagen. Tecnologia com
+            rigor e propósito humano.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Navegação</div>
+          <div class="footer-links">
+            <a href="#hero" class="footer-link">Início</a>
+            <a href="#sobre" class="footer-link">Telemetria</a>
+            <a href="#galeria" class="footer-link">Galeria</a>
+            <a href="#solucoes" class="footer-link">Soluções</a>
+            <a href="#metodo" class="footer-link">Método Copenhagen</a>
+            <a href="#off-track" class="footer-link">Off-Track</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Atuação</div>
+          <div class="footer-links">
+            <a href="#palestras" class="footer-link">Palestras Educacionais</a>
+            <a href="#palestras" class="footer-link">Palestras Corporativas</a>
+            <a href="#solucoes" class="footer-link">Desenvolvimento Autônomo</a>
+            <a href="#metodo" class="footer-link">Consultoria em Agilidade</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 Benjamin Soares. Todos os direitos reservados.</span>
+        <span>Design System Editorial Chic &amp; Scroll Horizontal</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/portfolio.js"></script>
+</body>
+
+</html>
