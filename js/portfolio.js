@@ -419,83 +419,6 @@
     });
   }
 
-  // 4.2. INTERACTIVE LETTER HIGHLIGHT (DESTAQUE ELEGANTE NAS LETRAS)
-  function initInteractiveText() {
-    var targets = document.querySelectorAll('.interactive-text');
-    targets.forEach(function (container) {
-      if (!container || container.dataset.interactiveDone) return;
-      container.dataset.interactiveDone = 'true';
-
-      function processNode(node) {
-        if (node.nodeType === Node.TEXT_NODE) {
-          var text = node.textContent;
-          if (!text) return null;
-          if (/^\s+$/.test(text)) {
-            return document.createTextNode(' ');
-          }
-
-          var fragment = document.createDocumentFragment();
-          var leadingSpace = /^\s+/.test(text);
-          var trailingSpace = /\s+$/.test(text);
-          var words = text.trim().split(/\s+/);
-
-          if (leadingSpace) {
-            fragment.appendChild(document.createTextNode(' '));
-          }
-
-          words.forEach(function (word, wIdx) {
-            if (!word) return;
-            var wordSpan = document.createElement('span');
-            wordSpan.className = 'text-word';
-
-            Array.prototype.forEach.call(word, function (char) {
-              var charSpan = document.createElement('span');
-              charSpan.className = 'text-char';
-              charSpan.textContent = char;
-              wordSpan.appendChild(charSpan);
-            });
-
-            fragment.appendChild(wordSpan);
-
-            if (wIdx < words.length - 1) {
-              fragment.appendChild(document.createTextNode(' '));
-            }
-          });
-
-          if (trailingSpace) {
-            fragment.appendChild(document.createTextNode(' '));
-          }
-
-          return fragment;
-        } else if (node.nodeType === Node.ELEMENT_NODE) {
-          if (node.tagName === 'BR') {
-            return node.cloneNode(true);
-          }
-          var clone = node.cloneNode(false);
-          var childNodes = Array.prototype.slice.call(node.childNodes);
-          childNodes.forEach(function (child) {
-            var processed = processNode(child);
-            if (processed) {
-              clone.appendChild(processed);
-            }
-          });
-          return clone;
-        }
-        return node.cloneNode(true);
-      }
-
-      var children = Array.prototype.slice.call(container.childNodes);
-      var newFragment = document.createDocumentFragment();
-      children.forEach(function (child) {
-        var res = processNode(child);
-        if (res) newFragment.appendChild(res);
-      });
-
-      container.innerHTML = '';
-      container.appendChild(newFragment);
-    });
-  }
-
   // 5. MOBILE MENU
   var hamBtn = document.querySelector('.nav-ham');
   var navLinks = document.querySelector('.nav-links');
@@ -641,7 +564,6 @@
     initTechCanvas();
     initCopenhagenHorizontalScroll();
     initTextRoll();
-    initInteractiveText();
     initNavbarScroll();
     initScrollReveal();
   });
