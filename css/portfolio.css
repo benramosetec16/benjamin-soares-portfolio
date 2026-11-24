@@ -808,6 +808,8 @@ header, main, footer {
               box-shadow 0.4s ease,
               border-color 0.4s ease;
   cursor: pointer;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 /* ESTADO BASE: Agrupados no centro com leve rotação sobreposta */

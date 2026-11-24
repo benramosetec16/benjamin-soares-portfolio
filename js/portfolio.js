@@ -336,8 +336,8 @@
       var currentScroll = -rect.top;
       var progress = totalScrollable > 0 ? Math.min(Math.max(currentScroll / totalScrollable, 0), 1) : 0;
 
-      // Distância horizontal total confortável
-      var maxTranslate = Math.max(track.scrollWidth - window.innerWidth + (window.innerWidth * 0.15), 550);
+      // Distância horizontal total confortável para os 6 cards
+      var maxTranslate = Math.max(track.scrollWidth - window.innerWidth + 160, 900);
       targetX = -progress * maxTranslate;
 
       // Suavização por interpolação linear (lerp)
@@ -544,7 +544,7 @@
       '.gallery-side-col > article',
       '.gallery-split-row > article',
       '.cards-fan-section .section-head-layout > *',
-      '.fan-card',
+      '.cards-fan-wrapper',
       '.copenhagen-scroll-section .section-head-layout > *',
       '#off-track .section-head-layout > *',
       '.split-card',
