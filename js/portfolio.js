@@ -12,8 +12,10 @@
   var videoModeBtn = document.getElementById('videoModeBtn');
   var dropOverlay = document.getElementById('dropOverlay');
 
+  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth <= 850);
   var isVideoActive = false;
-  var isScrollSyncMode = true; // Modo Scroll ativo: o vídeo avança e retrocede com o scroll!
+  // No celular/tablet: reprodução contínua (loop) fluida garantida. No desktop: scroll sync.
+  var isScrollSyncMode = !isMobile;
   var targetTime = 0;
   var currentVideoTime = 0;
 
@@ -21,18 +23,28 @@
     if (!video) return;
 
     video.muted = true;
+    video.defaultMuted = true;
     video.playsInline = true;
-    video.loop = !isScrollSyncMode;
-    video.autoplay = !isScrollSyncMode;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+
+    if (!isScrollSyncMode) {
+      video.loop = true;
+      video.autoplay = true;
+      video.setAttribute('loop', '');
+      video.setAttribute('autoplay', '');
+    }
 
     function onVideoReady() {
       isVideoActive = true;
       if (isScrollSyncMode) {
         video.pause();
       } else {
-        if (video.paused) {
-          video.play().catch(function (e) {
-            console.warn('Autoplay muted catch:', e);
+        var p = video.play();
+        if (p !== undefined) {
+          p.catch(function (e) {
+            console.log('Autoplay deferred:', e);
           });
         }
       }
@@ -68,29 +80,43 @@
     if (!video) return;
 
     video.muted = true;
+    video.defaultMuted = true;
     video.playsInline = true;
-    video.autoplay = !isScrollSyncMode;
-    video.loop = !isScrollSyncMode;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+
+    if (!isScrollSyncMode) {
+      video.loop = true;
+      video.autoplay = true;
+      video.setAttribute('loop', '');
+      video.setAttribute('autoplay', '');
+    }
 
     if (isScrollSyncMode) {
       video.pause();
+    } else {
+      var playP = video.play();
+      if (playP !== undefined) {
+        playP.catch(function () { });
+      }
     }
 
     var sourceEl = video.querySelector('source');
     var defaultSrc = (sourceEl && sourceEl.getAttribute('src')) ? sourceEl.getAttribute('src') : 'assets/video/hero.mp4';
     loadVideoSource(defaultSrc, '');
 
-    // Garante que o play seja disparado
-    if (video.paused && !isScrollSyncMode) {
-      video.play().catch(function () { });
-    }
-
-    // Desbloqueia reprodução no primeiro clique se o navegador tiver bloqueado
-    document.addEventListener('click', function unlockAutoplay() {
+    // Desbloqueia reprodução no primeiro toque/scroll no mobile ou clique no desktop
+    var unlockVideo = function () {
       if (video && video.paused && !isScrollSyncMode) {
-        video.play().catch(function () { });
+        video.play().then(function () {
+          isVideoActive = true;
+        }).catch(function () { });
       }
-    }, { once: true });
+    };
+    ['touchstart', 'touchend', 'scroll', 'click'].forEach(function (evt) {
+      window.addEventListener(evt, unlockVideo, { once: true, passive: true });
+    });
 
     // FADE-OUT SUAVE DO VÍDEO CONFORME O USUÁRIO PASSA DO HERO
     var videoContainer = document.querySelector('.video-bg-container');
@@ -518,7 +544,7 @@
       '.gallery-side-col > article',
       '.gallery-split-row > article',
       '.cards-fan-section .section-head-layout > *',
-      '.fan-card-item',
+      '.fan-card',
       '.copenhagen-scroll-section .section-head-layout > *',
       '#off-track .section-head-layout > *',
       '.split-card',
@@ -545,7 +571,7 @@
       '.contact-info-panel',
       '.gallery-split-row',
       '.gallery-side-col',
-      '.cards-fan-track'
+      '.cards-fan-wrapper'
     ];
 
     staggerContainers.forEach(function (sel) {
@@ -568,22 +594,20 @@
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-revealed');
-          observer.unobserve(entry.target);
+        } else {
+          // Quando o usuário rola para longe e o elemento sai do campo de visão,
+          // remove a classe. Assim, ao rolar de volta, a revelação acontece novamente!
+          entry.target.classList.remove('is-revealed');
         }
       });
     }, {
       root: null,
       threshold: 0.1,
-      rootMargin: '0px 0px -40px 0px'
+      rootMargin: '0px 0px -20px 0px'
     });
 
     elements.forEach(function (el) {
-      var rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        el.classList.add('is-revealed');
-      } else {
-        observer.observe(el);
-      }
+      observer.observe(el);
     });
   }
 
