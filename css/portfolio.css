@@ -1379,16 +1379,24 @@ strong:hover, b:hover, .keyword-highlight:hover {
   text-shadow: 0 0 22px rgba(255, 255, 255, 0.8), 0 0 40px rgba(180, 220, 255, 0.5);
 }
 
-/* Scroll Reveal (Elementos e textos se revelando em cascata ao rolar) */
+/* Scroll Reveal (Elementos e textos se revelando em cascata ao rolar — bidirecional) */
 .reveal-on-scroll {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
 .reveal-on-scroll.is-revealed {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Ao sair da tela, o elemento reseta de forma rápida e limpa para re-animar na próxima rolagem */
+.reveal-on-scroll:not(.is-revealed) {
+  opacity: 0 !important;
+  transform: translateY(28px) !important;
+  transition-delay: 0s !important;
+  transition-duration: 0.22s !important;
 }

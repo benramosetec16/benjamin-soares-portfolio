@@ -528,7 +528,7 @@
     updateNav();
   }
 
-  // 7. SCROLL REVEAL CASCADE (TEXTOS E ELEMENTOS SE REVELANDO UM ATRÁS DO OUTRO)
+  // 7. SCROLL REVEAL CASCADE (TEXTOS E ELEMENTOS SE REVELANDO AO SUBIR E DESCER A PÁGINA)
   function initScrollReveal() {
     var revealSelectors = [
       '.hero-layout > *',
@@ -571,44 +571,68 @@
       '.contact-info-panel',
       '.gallery-split-row',
       '.gallery-side-col',
-      '.cards-fan-wrapper'
+      '.cards-fan-wrapper',
+      '.statement-content',
+      '.contact-headline-wrap'
     ];
 
     staggerContainers.forEach(function (sel) {
       document.querySelectorAll(sel).forEach(function (container) {
         var items = container.querySelectorAll(':scope > .reveal-on-scroll, :scope > * > .reveal-on-scroll');
         items.forEach(function (item, idx) {
-          item.style.transitionDelay = (idx * 0.12) + 's';
+          var delay = (idx * 0.12).toFixed(2) + 's';
+          item.dataset.staggerDelay = delay;
+          item.style.transitionDelay = delay;
         });
       });
     });
 
-    if (!('IntersectionObserver' in window)) {
-      elements.forEach(function (el) {
-        el.classList.add('is-revealed');
-      });
-      return;
-    }
+    // Motor de revelação bidirecional contínua (sobe e desce)
+    function checkReveal() {
+      var windowH = window.innerHeight || document.documentElement.clientHeight;
 
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-revealed');
+      elements.forEach(function (el) {
+        var rect = el.getBoundingClientRect();
+
+        // O elemento está visível no viewport (com margem de ativação confortável)
+        var inView = (rect.top < windowH * 0.92) && (rect.bottom > windowH * 0.05);
+
+        if (inView) {
+          if (!el.classList.contains('is-revealed')) {
+            if (el.dataset.staggerDelay) {
+              el.style.transitionDelay = el.dataset.staggerDelay;
+            }
+            el.classList.add('is-revealed');
+          }
         } else {
-          // Quando o usuário rola para longe e o elemento sai do campo de visão,
-          // remove a classe. Assim, ao rolar de volta, a revelação acontece novamente!
-          entry.target.classList.remove('is-revealed');
+          // Quando o usuário rola para longe (subindo ou descendo e o elemento sai da tela),
+          // remove a classe para reanimar imediatamente quando entrar de novo!
+          if (el.classList.contains('is-revealed')) {
+            el.style.transitionDelay = '0s';
+            el.classList.remove('is-revealed');
+          }
         }
       });
-    }, {
-      root: null,
-      threshold: 0.1,
-      rootMargin: '0px 0px -20px 0px'
-    });
+    }
 
-    elements.forEach(function (el) {
-      observer.observe(el);
-    });
+    var isTicking = false;
+    function onScrollCheck() {
+      if (!isTicking) {
+        requestAnimationFrame(function () {
+          checkReveal();
+          isTicking = false;
+        });
+        isTicking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScrollCheck, { passive: true });
+    window.addEventListener('resize', onScrollCheck, { passive: true });
+    
+    // Executa imediatamente e logo após o carregamento inicial dos assets
+    checkReveal();
+    setTimeout(checkReveal, 100);
+    setTimeout(checkReveal, 400);
   }
 
   // DOMContentLoaded
