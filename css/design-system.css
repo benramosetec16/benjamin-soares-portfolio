@@ -151,7 +151,24 @@ body {
 .font-editorial { font-family: var(--font-editorial); }
 
 /* SIGNATURE RED DOT (Rossetti Design System) */
+/* Updated design system adjustments per user request */
+
+/* Remove orange red-dot accent – set to inherit text color */
 .red-dot {
+  color: var(--color--text-primary, #ffffff); /* use primary text color */
+}
+
+/* Hide scroll cue (mouse icon) that appears at top of hero */
+.scroll-down-cue {
+  display: none;
+}
+
+/* Hide instructional paragraphs that mention mouse hover and vertical scroll */
+.cards-fan-section p.text-body,
+.copenhagen-header-box p.text-body {
+  display: none;
+}
+
   color: var(--color--lime, #ee482e);
   display: inline;
   font-weight: 800;
