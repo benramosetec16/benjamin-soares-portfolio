@@ -7,11 +7,14 @@
   <title>Benjamin Soares — Desenvolvedor, Scrum Master &amp; Palestrante</title>
   <meta name="description"
     content="Portfólio de Benjamin Soares: Desenvolvedor e Scrum Master da startup de saúde mental pelo Método Copenhagen, estudante da ETEC MAS, medalhista da OBA e OBM.">
-  <link rel="stylesheet" href="css/design-system.css?v=2.4">
-  <link rel="stylesheet" href="css/portfolio.css?v=2.4">
+  <link rel="stylesheet" href="css/design-system.css?v=3.0">
+  <link rel="stylesheet" href="css/portfolio.css?v=3.0">
 </head>
 
 <body>
+
+  <!-- ATMOSPHERE GRAIN (RAFAEL ROSSETTI DESIGN SYSTEM TEXTURE) -->
+  <div class="atmosphere-grain" aria-hidden="true"></div>
 
   <!-- SCROLL-DRIVEN VIDEO BACKGROUND (GOOGLE FLOW ENGINE) -->
   <div class="video-bg-container">
@@ -51,14 +54,14 @@
     <div class="c-container nav-inner">
       <a href="#hero" class="nav-brand" title="Benjamin Soares">
         <div class="brand-text">
-          <span class="brand-title">Benjamin Soares</span>
+          <span class="brand-title">Benjamin Soares<span class="red-dot">.</span></span>
           <span class="brand-sub">Desenvolvedor &amp; Scrum Master</span>
         </div>
       </a>
 
       <!-- Center Monogram -->
       <div class="nav-center-badge">
-        <a href="#hero" class="badge-logo" title="BS Monogram">BS</a>
+        <a href="#hero" class="badge-logo" title="BS Monogram">BS<span class="red-dot">.</span></a>
       </div>
 
       <nav class="nav-links">
@@ -87,20 +90,37 @@
   <main>
     <!-- HERO SECTION -->
     <section id="hero" class="hero-section">
-      <div class="c-container hero-layout">
+      <!-- 1. PURE VIDEO STAGE (O vídeo do menino aparece 100% sozinho, sem nenhum texto no início) -->
+      <div class="hero-pure-stage" id="heroPureStage">
+        <div class="scroll-down-cue" id="scrollCue" title="Role para baixo para ver o conteúdo">
+          <div class="scroll-cue-mouse">
+            <span class="scroll-cue-wheel"></span>
+          </div>
+          <span class="scroll-cue-arrow"></span>
+        </div>
+      </div>
+
+      <!-- 2. HERO CONTENT REVEAL (Surge suavemente ao rolar/abaixar a página) -->
+      <div class="c-container hero-layout hero-content-reveal" id="heroContent">
         <div class="hero-main">
+          <!-- TOP METADATA BAR (Estilo Rafael Rossetti DS) -->
+          <div class="hero-top-meta">
+            <span>TECNOLOGIA · SAÚDE MENTAL · ALTA PERFORMANCE</span>
+            <span>SÃO PAULO, BRASIL <span class="local-time">/ 2026</span></span>
+          </div>
+
           <div class="hero-eyebrow-wrap">
-            <span class="text-eyebrow">VISÃO GERAL</span>
+            <span class="text-eyebrow">VISÃO GERAL<span class="red-dot">.</span></span>
             <span class="tag-badge">Método Copenhagen Pioneer</span>
           </div>
 
           <div class="hero-headline">
             <h1 class="text-impact-xl">
               CÓDIGO COM
-              <span class="text-chic-accent">Propósito</span>
+              <span class="text-chic-accent">Propósito<span class="red-dot">.</span></span>
             </h1>
             <h1 class="text-impact-xl">
-              E ALTA PERFORMANCE.
+              E ALTA PERFORMANCE<span class="red-dot">.</span>
             </h1>
           </div>
 
@@ -744,7 +764,7 @@
     </div>
   </footer>
 
-  <script src="js/portfolio.js?v=2.4"></script>
+  <script src="js/portfolio.js?v=3.0"></script>
 </body>
 
 </html>

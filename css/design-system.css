@@ -1,38 +1,92 @@
 /* ============================================================
-   BENJAMIN SOARES DESIGN SYSTEM — CHIC MIDNIGHT NAVY EDITION
+   BENJAMIN SOARES DESIGN SYSTEM — ROSSETTI EDITORIAL CHIC EDITION
+   Typography & Aesthetic faithful to Rafael Rossetti Design System
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+/* 1. GOOGLE FONTS FALLBACK & FULL GLYPH RANGE */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700;1,800&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+/* 2. LOCAL EXACT FONTS EXTRACTED FROM RAFAELROSSETTI.COM.BR */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../assets/fonts/BarlowCondensed-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('../assets/fonts/BarlowCondensed-800.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Mona Sans';
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url('../assets/fonts/MonaSans-Variable.woff2') format('woff2-variations'),
+       url('../assets/fonts/MonaSans-Variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Brier';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/Brier-Bold.woff2') format('woff2');
+}
 
 :root {
-  /* REFINED PALETTE: LUXURY OBSIDIAN NAVY & POLISHED PLATINUM */
+  /* OBSIDIAN & SURFACES PALETTE */
   --color--bg-dark: #060810;                /* Preto azulado profundo / Obsidian */
   --color--bg-surface: #0b1122;             /* Superfície elegante */
   --color--bg-elevated: #101932;            /* Painéis e cards */
   --color--bg-glass: rgba(11, 17, 34, 0.78);/* Glassmorphism discreto */
   
-  /* ACCENT TOKENS (Sóbrio, Chic, Sem Neon) */
+  /* ROSSETTI DARK CARD TOKENS */
+  --color--dark-card: #12151e;
+  --color--dark-card-border: rgba(255, 255, 255, 0.08);
+  --color--dark-card-highlight: rgba(255, 255, 255, 0.04);
+  --color--pearl-surface: rgba(255, 255, 255, 0.06);
+
+  /* RAFAEL ROSSETTI ACCENT TOKENS */
+  --color--lime: #ee482e;                   /* Rafael Rossetti signature vermilion */
+  --color--lime-off: #c13520;
+  --color--accent-dot: #ee482e;             /* Dot signature */
+  --color--gold-primary: #e5a93c;           /* Warm gold */
+  --color--gold-highlight: #ffd17a;
+  --color--gold-border: #f3c86a;
+  --color--gold-surface: rgba(229, 169, 60, 0.12);
+
+  /* ACCENT TOKENS (Chic & Platina) */
   --color--accent-pure: #ffffff;            /* Branco puro de alto contraste */
   --color--accent-platinum: #e2e8f0;        /* Platina acetinada */
   --color--accent-silver: #cbd5e1;          /* Prata metálica fosca */
   --color--accent-subtle: #475569;          /* Cinza escuro estrutural */
 
-  /* BORDERS (Finas, sofisticadas, sem azul claro berrante) */
+  /* BORDERS */
   --color--border-subtle: rgba(255, 255, 255, 0.08);
   --color--border-hover: rgba(255, 255, 255, 0.28);
-  --color--border-card: rgba(255, 255, 255, 0.07);
+  --color--border-card: rgba(255, 255, 255, 0.08);
 
-  /* TYPOGRAPHY COLORS */
-  --color--text-primary: #ffffff;
+  /* TYPOGRAPHY COLORS (Warm Off-White inspired by Rossetti #f5f4ef) */
+  --color--text-primary: #f5f4ef;
   --color--text-secondary: #94a3b8;
   --color--text-muted: #64748b;
 
-  /* CHIC BALANCED TYPOGRAPHY TOKENS (Outfit + Plus Jakarta Sans) */
-  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* RAFAEL ROSSETTI EXACT TYPOGRAPHY STACK */
+  --font-display: 'Barlow Condensed', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Mona Sans', 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-editorial: 'Brier', 'Barlow Condensed', Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* MOTION & CURVES */
   --cubic-default: cubic-bezier(0.16, 1, 0.3, 1);
+  --cubic-rossetti: cubic-bezier(.65, .05, 0, 1);
   --duration-default: 0.65s;
   --animation-default: var(--duration-default) var(--cubic-default);
 
@@ -78,15 +132,37 @@ body {
   position: relative;
 }
 
+/* ATMOSPHERE GRAIN (Direct from Rafael Rossetti Design System) */
+.atmosphere-grain {
+  pointer-events: none;
+  position: fixed;
+  inset: -6svh -6vw;
+  overflow: hidden;
+  z-index: 2;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Cpath fill='%23808080' filter='url(%23n)' d='M0 0h128v128H0z'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
 /* TYPOGRAPHY */
 .font-display { font-family: var(--font-display); }
 .font-body { font-family: var(--font-body); }
+.font-editorial { font-family: var(--font-editorial); }
+
+/* SIGNATURE RED DOT (Rossetti Design System) */
+.red-dot {
+  color: var(--color--lime, #ee482e);
+  display: inline;
+  font-weight: 800;
+  transition: color 0.3s ease;
+}
 
 .text-impact-xl {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2.2rem, 5vw, 4.4rem);
-  line-height: 1.1;
+  font-size: clamp(2.4rem, 5.4vw, 4.8rem);
+  line-height: 1.04;
   letter-spacing: -0.015em;
   text-transform: uppercase;
 }
@@ -104,16 +180,23 @@ body {
 .text-title-lg {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.75rem, 3.2vw, 2.7rem);
-  line-height: 1.15;
+  font-size: clamp(1.85rem, 3.4vw, 2.9rem);
+  line-height: 1.1;
   letter-spacing: -0.015em;
   text-transform: uppercase;
+}
+
+.text-editorial {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .text-eyebrow {
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color--text-secondary);
@@ -126,9 +209,30 @@ body {
   font-family: var(--font-body);
   font-weight: 400;
   font-size: clamp(1rem, 1.15vw, 1.18rem);
-  line-height: 1.65;
+  line-height: 1.68;
   color: var(--color--text-secondary);
   letter-spacing: -0.01em;
+}
+
+/* HERO TOP METADATA BAR (Rossetti Structure) */
+.hero-top-meta {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color--text-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color--border-subtle);
+  padding-bottom: 0.9rem;
+  margin-bottom: 1.8rem;
+  width: 100%;
+}
+
+.hero-top-meta .local-time {
+  opacity: 0.75;
 }
 
 /* CONTAINER */
@@ -165,28 +269,28 @@ body {
 
 /* Primary Button (White / Platinum Chic) */
 .btn-w[data-theme="chic-white"] {
-  background-color: #ffffff;
+  background-color: #f5f4ef;
   color: #060810;
-  border-color: #ffffff;
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+  border-color: #f5f4ef;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.12);
 }
 
 .btn-w[data-theme="chic-white"]:hover {
-  background-color: #f1f5f9;
-  box-shadow: 0 6px 30px rgba(255, 255, 255, 0.28);
+  background-color: #ffffff;
+  box-shadow: 0 6px 30px rgba(255, 255, 255, 0.25);
 }
 
 /* Secondary Button (Glass & Hairline) */
 .btn-w[data-theme="chic-glass"] {
   background: rgba(255, 255, 255, 0.04);
-  color: #ffffff;
+  color: #f5f4ef;
   border-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(12px);
 }
 
 .btn-w[data-theme="chic-glass"]:hover {
   background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.38);
 }
 
 .btn-inner {

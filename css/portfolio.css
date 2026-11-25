@@ -100,7 +100,14 @@ header, main, footer {
   font-family: var(--font-body);
   font-size: 0.75rem;
   color: var(--color--text-secondary);
+  opacity: 0;
+  pointer-events: none;
   transition: opacity 0.35s ease, border-color 0.3s;
+}
+
+.video-flow-controller.is-active {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .video-flow-controller:hover {
@@ -187,7 +194,7 @@ header, main, footer {
   background: rgba(14, 21, 40, 0.6);
 }
 
-/* 2. NAVBAR (CHIC MINIMALIST — TRANSPARENTE NO TOPO, VIDRO AO ROLAR) */
+/* 2. NAVBAR (CHIC MINIMALIST — OCULTA NO TOPO, SURGE AO ROLAR) */
 .nav-wrap {
   position: fixed;
   top: 0;
@@ -199,7 +206,16 @@ header, main, footer {
   border-bottom: 1px solid transparent;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  transition: background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-16px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+.nav-wrap.nav-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .nav-wrap.is-scrolled {
@@ -314,12 +330,101 @@ header, main, footer {
 
 /* 3. HERO SECTION */
 .hero-section {
-  min-height: 100vh;
-  padding-top: calc(var(--nav-height) + 4rem);
+  position: relative;
+  min-height: 190vh;
+  padding-top: 0;
   padding-bottom: 6rem;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* 1. PURE VIDEO STAGE (O vídeo do menino aparece 100% sozinho, sem texto algum) */
+.hero-pure-stage {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 2.8rem;
+  position: relative;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+/* Animated Minimal Scroll Down Cue (Sem texto, apenas o ícone minimalista) */
+.scroll-down-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  opacity: 0.85;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  animation: cuePulse 2.4s ease-in-out infinite;
+  user-select: none;
+}
+
+.scroll-cue-mouse {
+  width: 22px;
+  height: 36px;
+  border: 2px solid rgba(245, 244, 239, 0.45);
+  border-radius: 12px;
+  display: flex;
   justify-content: center;
+  padding-top: 6px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+.scroll-cue-wheel {
+  width: 3px;
+  height: 8px;
+  background: var(--color--lime, #ee482e);
+  border-radius: 2px;
+  animation: mouseScroll 1.6s ease-in-out infinite;
+}
+
+.scroll-cue-arrow {
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid rgba(245, 244, 239, 0.55);
+  border-bottom: 2px solid rgba(245, 244, 239, 0.55);
+  transform: rotate(45deg);
+  animation: arrowBounce 1.6s ease-in-out infinite;
+}
+
+@keyframes mouseScroll {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(9px); opacity: 0; }
+}
+
+@keyframes arrowBounce {
+  0%, 100% { transform: translateY(0) rotate(45deg); opacity: 0.4; }
+  50% { transform: translateY(4px) rotate(45deg); opacity: 0.95; }
+}
+
+@keyframes cuePulse {
+  0%, 100% { opacity: 0.7; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-3px); }
+}
+
+/* 2. HERO CONTENT REVEAL (Surge suavemente quando o usuário abaixar a página) */
+.hero-content-reveal {
+  padding-top: calc(var(--nav-height) + 2rem);
+  padding-bottom: 5rem;
+  opacity: 0;
+  transform: translateY(45px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.hero-content-reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero-layout {

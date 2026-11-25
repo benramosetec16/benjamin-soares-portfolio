@@ -127,11 +127,11 @@
       if (!videoContainer) return;
       var scrollY = window.pageYOffset || document.documentElement.scrollTop;
 
-      // O vídeo fica 100% visível no topo (Hero).
-      // Ao rolar além do Hero (35% da altura da tela), ele inicia o fade-out.
-      // E desaparece completamente por volta de 110% da tela (início das Soluções & Inovação).
-      var fadeStart = window.innerHeight * 0.35;
-      var fadeEnd = window.innerHeight * 1.15;
+      // O vídeo fica 100% visível na tela inicial e durante a leitura do Hero.
+      // O fade-out só inicia após o usuário passar pelo conteúdo do Hero (aprox. 150% da altura da tela).
+      // E desaparece completamente por volta de 240% da tela (início das Soluções & Inovação).
+      var fadeStart = window.innerHeight * 1.5;
+      var fadeEnd = window.innerHeight * 2.4;
 
       var opacity = 1;
       if (scrollY > fadeStart) {
@@ -167,9 +167,6 @@
         if (opacity <= 0.05) {
           controller.style.opacity = '0';
           controller.style.pointerEvents = 'none';
-        } else {
-          controller.style.opacity = '1';
-          controller.style.pointerEvents = 'auto';
         }
       }
     }
@@ -178,11 +175,58 @@
     window.addEventListener('resize', updateVideoScrollFade, { passive: true });
     updateVideoScrollFade();
 
+    // REVEAL DO HERO E NAVBAR AO ROLAR A PÁGINA (VÍDEO DO MENINO SURGE SOZINHO NO INÍCIO)
+    var navWrap = document.querySelector('.nav-wrap');
+    var heroContent = document.getElementById('heroContent');
+    var scrollCue = document.getElementById('scrollCue');
+    var videoController = document.getElementById('videoController');
+
+    function updateHeroScrollReveal() {
+      var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+
+      // No início do site (scrollY <= 45): O vídeo do menino aparece sozinho, sem nenhum texto
+      if (scrollY > 45) {
+        if (navWrap) navWrap.classList.add('nav-visible');
+        if (videoController) videoController.classList.add('is-active');
+      } else {
+        if (navWrap) {
+          navWrap.classList.remove('nav-visible');
+          navWrap.classList.remove('is-scrolled');
+        }
+        if (videoController) videoController.classList.remove('is-active');
+      }
+
+      if (scrollY > 120) {
+        if (navWrap) navWrap.classList.add('is-scrolled');
+      } else {
+        if (navWrap) navWrap.classList.remove('is-scrolled');
+      }
+
+      // Os textos do Hero aparecem suavemente ao abaixar a tela
+      if (scrollY > 60) {
+        if (heroContent) heroContent.classList.add('is-revealed');
+        if (scrollCue) scrollCue.style.opacity = '0';
+      } else {
+        if (heroContent) heroContent.classList.remove('is-revealed');
+        if (scrollCue) scrollCue.style.opacity = '0.85';
+      }
+    }
+
+    window.addEventListener('scroll', updateHeroScrollReveal, { passive: true });
+    window.addEventListener('resize', updateHeroScrollReveal, { passive: true });
+    updateHeroScrollReveal();
+
+    if (scrollCue && heroContent) {
+      scrollCue.addEventListener('click', function () {
+        heroContent.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
     // Render loop para o modo de scroll
     function renderVideoScrub() {
       if (video && video.duration && !isNaN(video.duration) && isScrollSyncMode) {
         var scrollY = window.pageYOffset || document.documentElement.scrollTop;
-        var maxScroll = window.innerHeight * 1.15;
+        var maxScroll = window.innerHeight * 2.4;
         var scrollProgress = Math.min(Math.max(scrollY / maxScroll, 0), 1);
         targetTime = scrollProgress * (video.duration - 0.05);
 
