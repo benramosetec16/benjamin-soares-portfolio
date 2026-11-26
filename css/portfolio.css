@@ -95,7 +95,7 @@
   height: auto;
   max-height: 75vh;
   object-fit: contain;
-  filter: invert(1) grayscale(1) brightness(0.85) contrast(4.2);
+  filter: invert(1) grayscale(1) contrast(2.0) brightness(1.15);
   pointer-events: none;
   user-select: none;
 }

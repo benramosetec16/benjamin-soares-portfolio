@@ -103,10 +103,10 @@
       if (!isSigMobile && isVisible && sigVideo.duration && !isNaN(sigVideo.duration)) {
         var scrubEnd = vh * 1.25;
         var sigProgress = Math.min(Math.max(scrollY / scrubEnd, 0), 1);
-        var sigTargetTime = sigProgress * (sigVideo.duration - 0.04);
-        sigCurrentTime += (sigTargetTime - sigCurrentTime) * 0.2;
+        var sigTargetTime = sigProgress * sigVideo.duration;
+        sigCurrentTime += (sigTargetTime - sigCurrentTime) * 0.22;
 
-        if (!sigVideo.seeking && Math.abs(sigCurrentTime - sigVideo.currentTime) > 0.02) {
+        if (!sigVideo.seeking && Math.abs(sigCurrentTime - sigVideo.currentTime) > 0.005) {
           sigVideo.currentTime = sigCurrentTime;
         }
       }
