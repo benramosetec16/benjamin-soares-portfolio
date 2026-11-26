@@ -150,30 +150,25 @@ body {
 .font-body { font-family: var(--font-body); }
 .font-editorial { font-family: var(--font-editorial); }
 
-/* SIGNATURE RED DOT (Rossetti Design System) */
-/* Updated design system adjustments per user request */
-
-/* Remove orange red-dot accent – set to inherit text color */
+/* SIGNATURE RED DOT — pontuação removida conforme pedido do usuário */
 .red-dot {
-  color: var(--color--text-primary, #ffffff); /* use primary text color */
-}
-
-/* Hide scroll cue (mouse icon) that appears at top of hero */
-.scroll-down-cue {
-  display: none;
-}
-
-/* Hide instructional paragraphs that mention mouse hover and vertical scroll */
-.cards-fan-section p.text-body,
-.copenhagen-header-box p.text-body {
-  display: none;
-}
-
-  color: var(--color--lime, #ee482e);
+  color: var(--color--text-primary, #f5f4ef);
   display: inline;
   font-weight: 800;
   transition: color 0.3s ease;
 }
+
+/* Hide scroll cue (mouse icon) */
+.scroll-down-cue {
+  display: none !important;
+}
+
+/* Hide instructional paragraphs */
+.cards-fan-section p.text-body,
+.copenhagen-header-box p.text-body {
+  display: none !important;
+}
+
 
 .text-impact-xl {
   font-family: var(--font-display);
