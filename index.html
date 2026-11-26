@@ -7,8 +7,8 @@
   <title>Benjamin Soares — Desenvolvedor, Scrum Master &amp; Palestrante</title>
   <meta name="description"
     content="Portfólio de Benjamin Soares: Desenvolvedor e Scrum Master da startup de saúde mental pelo Método Copenhagen, estudante da ETEC MAS, medalhista da OBA e OBM.">
-  <link rel="stylesheet" href="css/design-system.css?v=3.0">
-  <link rel="stylesheet" href="css/portfolio.css?v=3.0">
+  <link rel="stylesheet" href="css/design-system.css?v=3.1">
+  <link rel="stylesheet" href="css/portfolio.css?v=3.1">
 </head>
 
 <body>
@@ -26,6 +26,14 @@
     <canvas id="techMeshCanvas"></canvas>
   </div>
   <div class="video-overlay-gradient"></div>
+
+  <!-- SIGNATURE INTRO LAYERS (FUNDO AZUL COM REVELAÇÃO NO MOUSE + ASSINATURA VIA SCROLL) -->
+  <div class="signature-bg-layer" id="signatureBgLayer" aria-hidden="true"></div>
+  <div class="signature-video-layer" id="signatureVideoLayer" aria-hidden="true">
+    <video id="signatureVideo" class="signature-intro-video" muted playsinline webkit-playsinline preload="auto">
+      <source src="assets/video/signature.mp4" type="video/mp4">
+    </video>
+  </div>
 
   <!-- ETEC MAS BACKGROUND LAYER (SURGE SUAVEMENTE DEPOIS QUE O VÍDEO FAZ FADE-OUT) -->
   <div class="etec-bg-container">
@@ -90,8 +98,14 @@
   <main>
     <!-- HERO SECTION -->
     <section id="hero" class="hero-section">
-      <!-- 1. PURE VIDEO STAGE (O vídeo do menino aparece 100% sozinho, sem nenhum texto no início) -->
+      <!-- 1. PURE VIDEO STAGE (Assinatura no fundo azul via scroll -> vídeo do menino aparece na frente) -->
       <div class="hero-pure-stage" id="heroPureStage">
+        <div class="scroll-down-cue" id="scrollCue" role="button" tabindex="0" aria-label="Rolar para baixo">
+          <div class="scroll-cue-mouse">
+            <div class="scroll-cue-wheel"></div>
+          </div>
+          <div class="scroll-cue-arrow"></div>
+        </div>
       </div>
 
       <!-- 2. HERO CONTENT REVEAL (Surge suavemente ao rolar/abaixar a página) -->
@@ -274,12 +288,18 @@
             </div>
             <div class="gallery-overlay-gradient"></div>
             <div class="gallery-content-wrap">
-              <span class="gallery-eyebrow">EQUIPE PIONEIRA // STARTUP</span>
+              <span class="gallery-eyebrow">EQUIPE PIONEIRA // ECHOMIND</span>
               <h3 class="gallery-title">A Primeira Startup no Método Copenhagen</h3>
               <p class="gallery-desc">
                 <strong>Benjamin Soares</strong> como <strong>Scrum Master</strong> liderando o grupo pioneiro da <strong>ETEC MAS</strong> que estruturou intervenções
                 preventivas em <strong>saúde mental</strong> pelo <strong>Método Copenhagen</strong>.
               </p>
+              <a href="https://echomind-rho.vercel.app/" target="_blank" rel="noopener noreferrer" class="echomind-project-link" style="align-self: flex-start; margin-top: 0.65rem;">
+                <span>Ver projeto</span>
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
             </div>
           </article>
 
@@ -355,19 +375,24 @@
         <!-- FANNED CARDS WRAPPER (Os cards se separam no hover) -->
         <div class="cards-fan-wrapper" title="Passe o mouse para abrir os cards">
 
-          <!-- CARD 1: STARTUP MÉTODO COPENHAGEN -->
+          <!-- CARD 1: STARTUP ECHOMIND / MÉTODO COPENHAGEN -->
           <article class="fan-card" data-index="1">
             <div class="card-top">
-              <span class="card-index-tag">STARTUP PIONEIRA</span>
-              <h3 class="card-title">Saúde Mental Copenhagen</h3>
+              <span class="card-index-tag">STARTUP PIONEIRA // ECHOMIND</span>
+              <h3 class="card-title">EchoMind — Saúde Mental Copenhagen</h3>
               <p class="card-desc">
-                Cofundador e Scrum Master da primeira startup escolar de conscientização e intervenção preventiva em
+                Cofundador e Scrum Master da EchoMind, primeira startup escolar de conscientização e intervenção preventiva em
                 saúde mental fundamentada no Método Copenhagen, oferecendo mapeamento e suporte humanizado para jovens e
                 instituições.
               </p>
             </div>
             <div class="card-bottom">
-              <span>Scrum Master</span>
+              <a href="https://echomind-rho.vercel.app/" target="_blank" rel="noopener noreferrer" class="echomind-project-link">
+                <span>Ver projeto</span>
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
               <span style="color: #ffffff; font-weight: 600;">2025 – PRESENTE</span>
             </div>
           </article>
@@ -669,10 +694,10 @@
         <!-- FRASE DE EFEITO -->
         <div class="contact-headline-wrap">
           <h2 class="contact-tagline">
-            Não tente fazer ligação<br>
-            para um desenvolvedor<span class="contact-tagline-accent"> fora de área.</span>
+            Transformo lógicas<br>
+            em interfaces que pessoas<span class="contact-tagline-accent"> gostam de usar.</span>
           </h2>
-          <p class="contact-tagline-sub">Contate-nos.</p>
+          <p class="contact-tagline-sub">Contate-me.</p>
         </div>
 
         <div class="cta-box">
@@ -751,7 +776,7 @@
     </div>
   </footer>
 
-  <script src="js/portfolio.js?v=3.0"></script>
+  <script src="js/portfolio.js?v=3.1"></script>
 </body>
 
 </html>

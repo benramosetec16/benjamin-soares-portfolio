@@ -5,6 +5,107 @@
 (function () {
   'use strict';
 
+  // 0. SIGNATURE INTRO (Fundo azul com revelação no mouse + assinatura via scroll)
+  function initSignatureIntro() {
+    var sigBgLayer = document.getElementById('signatureBgLayer');
+    var sigVideoLayer = document.getElementById('signatureVideoLayer');
+    var sigVideo = document.getElementById('signatureVideo');
+    var scrollCue = document.getElementById('scrollCue');
+
+    if (scrollCue) {
+      scrollCue.classList.remove('is-hidden');
+    }
+
+    if (!sigBgLayer || !sigVideoLayer || !sigVideo) return;
+
+    sigVideo.muted = true;
+    sigVideo.defaultMuted = true;
+    sigVideo.playsInline = true;
+    sigVideo.setAttribute('muted', '');
+    sigVideo.setAttribute('playsinline', '');
+    sigVideo.setAttribute('webkit-playsinline', '');
+    sigVideo.pause();
+
+    if (sigVideo.readyState === 0) {
+      sigVideo.load();
+    }
+
+    sigVideo.addEventListener('loadeddata', function () {
+      sigVideo.pause();
+    });
+
+    // Efeito de revelar o vídeo do menino por onde o mouse passa
+    var targetX = window.innerWidth * 0.5;
+    var targetY = window.innerHeight * 0.5;
+    var curX = targetX;
+    var curY = targetY;
+    var targetR = 0;
+    var curR = 0;
+    var sigCurrentTime = 0;
+    var isMouseActive = false;
+
+    window.addEventListener('mousemove', function (e) {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      targetR = 185;
+      if (!isMouseActive) {
+        curX = targetX;
+        curY = targetY;
+        isMouseActive = true;
+      }
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', function () {
+      targetR = 0;
+    });
+
+    function renderSignatureFrame() {
+      var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+      var vh = window.innerHeight || 800;
+
+      // 1. Opacidade das camadas da assinatura (desaparece depois que ela termina para o vídeo do menino aparecer na frente)
+      var fadeStart = vh * 1.45;
+      var fadeEnd = vh * 1.85;
+      var layerOpacity = 1;
+      if (scrollY > fadeStart) {
+        layerOpacity = 1 - ((scrollY - fadeStart) / (fadeEnd - fadeStart));
+        layerOpacity = Math.max(0, Math.min(1, layerOpacity));
+      }
+
+      sigBgLayer.style.opacity = layerOpacity.toFixed(3);
+      sigVideoLayer.style.opacity = layerOpacity.toFixed(3);
+      var isVisible = layerOpacity > 0.01;
+      sigBgLayer.style.visibility = isVisible ? 'visible' : 'hidden';
+      sigVideoLayer.style.visibility = isVisible ? 'visible' : 'hidden';
+
+      // 2. Scrubbing da assinatura sincronizado com o scroll (duração maior antes do vídeo do menino)
+      if (isVisible && sigVideo.duration && !isNaN(sigVideo.duration)) {
+        var scrubEnd = vh * 1.25;
+        var sigProgress = Math.min(Math.max(scrollY / scrubEnd, 0), 1);
+        var sigTargetTime = sigProgress * (sigVideo.duration - 0.04);
+        sigCurrentTime += (sigTargetTime - sigCurrentTime) * 0.2;
+
+        if (!sigVideo.seeking && Math.abs(sigCurrentTime - sigVideo.currentTime) > 0.02) {
+          sigVideo.currentTime = sigCurrentTime;
+        }
+      }
+
+      // 3. Interpolação suave do spotlight do mouse no fundo azul
+      if (isVisible) {
+        curX += (targetX - curX) * 0.16;
+        curY += (targetY - curY) * 0.16;
+        curR += (targetR - curR) * 0.14;
+        sigBgLayer.style.setProperty('--mx', curX.toFixed(1) + 'px');
+        sigBgLayer.style.setProperty('--my', curY.toFixed(1) + 'px');
+        sigBgLayer.style.setProperty('--mr', curR.toFixed(1) + 'px');
+      }
+
+      requestAnimationFrame(renderSignatureFrame);
+    }
+
+    requestAnimationFrame(renderSignatureFrame);
+  }
+
   // 1. VIDEO ENGINE (Google Flow / Continuous Ambient & Scroll Sync)
   var video = document.getElementById('flowVideo');
   var videoStatusText = document.getElementById('videoStatusText');
@@ -127,11 +228,11 @@
       if (!videoContainer) return;
       var scrollY = window.pageYOffset || document.documentElement.scrollTop;
 
-      // O vídeo fica 100% visível na tela inicial e durante a leitura do Hero.
-      // O fade-out só inicia após o usuário passar pelo conteúdo do Hero (aprox. 150% da altura da tela).
-      // E desaparece completamente por volta de 240% da tela (início das Soluções & Inovação).
-      var fadeStart = window.innerHeight * 1.5;
-      var fadeEnd = window.innerHeight * 2.4;
+      // O vídeo fica 100% visível quando aparece na frente e durante a leitura do Hero.
+      // O fade-out só inicia após o usuário passar pelo conteúdo do Hero (aprox. 290% da altura da tela).
+      // E desaparece completamente por volta de 380% da tela (início das Soluções & Inovação).
+      var fadeStart = window.innerHeight * 2.9;
+      var fadeEnd = window.innerHeight * 3.8;
 
       var opacity = 1;
       if (scrollY > fadeStart) {
@@ -183,9 +284,10 @@
 
     function updateHeroScrollReveal() {
       var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+      var vh = window.innerHeight || 800;
 
-      // No início do site (scrollY <= 45): O vídeo do menino aparece sozinho, sem nenhum texto
-      if (scrollY > 45) {
+      // Navbar e controlador aparecem quando o vídeo do menino assume a tela
+      if (scrollY > vh * 1.8) {
         if (navWrap) navWrap.classList.add('nav-visible');
         if (videoController) videoController.classList.add('is-active');
       } else {
@@ -196,19 +298,24 @@
         if (videoController) videoController.classList.remove('is-active');
       }
 
-      if (scrollY > 120) {
+      if (scrollY > vh * 1.9) {
         if (navWrap) navWrap.classList.add('is-scrolled');
       } else {
         if (navWrap) navWrap.classList.remove('is-scrolled');
       }
 
-      // Os textos do Hero aparecem suavemente ao abaixar a tela
+      // O indicador de scroll some assim que o usuário começa a rolar
       if (scrollY > 60) {
-        if (heroContent) heroContent.classList.add('is-revealed');
         if (scrollCue) scrollCue.style.opacity = '0';
       } else {
-        if (heroContent) heroContent.classList.remove('is-revealed');
         if (scrollCue) scrollCue.style.opacity = '0.85';
+      }
+
+      // Os textos do Hero aparecem suavemente após o vídeo do menino aparecer na frente
+      if (scrollY > vh * 1.95) {
+        if (heroContent) heroContent.classList.add('is-revealed');
+      } else {
+        if (heroContent) heroContent.classList.remove('is-revealed');
       }
     }
 
@@ -222,12 +329,13 @@
       });
     }
 
-    // Render loop para o modo de scroll
+    // Render loop para o modo de scroll (começa após a assinatura terminar)
     function renderVideoScrub() {
       if (video && video.duration && !isNaN(video.duration) && isScrollSyncMode) {
         var scrollY = window.pageYOffset || document.documentElement.scrollTop;
-        var maxScroll = window.innerHeight * 2.4;
-        var scrollProgress = Math.min(Math.max(scrollY / maxScroll, 0), 1);
+        var scrubStart = window.innerHeight * 1.35;
+        var scrubEnd = window.innerHeight * 3.8;
+        var scrollProgress = Math.min(Math.max((scrollY - scrubStart) / (scrubEnd - scrubStart), 0), 1);
         targetTime = scrollProgress * (video.duration - 0.05);
 
         // Interpolação suave (lerp) para scrubbing limpo
@@ -604,6 +712,7 @@
 
   // DOMContentLoaded
   document.addEventListener('DOMContentLoaded', function () {
+    initSignatureIntro();
     initScrollVideo();
     initTechCanvas();
     initCopenhagenHorizontalScroll();

@@ -47,6 +47,57 @@
   transition: opacity 0.2s ease-out;
 }
 
+/* SIGNATURE INTRO LAYERS (FUNDO AZUL + REVELAÇÃO NO MOUSE + ASSINATURA VIA SCROLL) */
+.signature-bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 45%, var(--color--bg-surface, #0b1122) 0%, var(--color--bg-dark, #060810) 100%);
+  --mx: 50%;
+  --my: 50%;
+  --mr: 0px;
+  -webkit-mask-image: radial-gradient(
+    circle var(--mr) at var(--mx) var(--my),
+    transparent 0%,
+    rgba(0, 0, 0, 0.22) 48%,
+    rgba(0, 0, 0, 0.85) 78%,
+    #000000 100%
+  );
+  mask-image: radial-gradient(
+    circle var(--mr) at var(--mx) var(--my),
+    transparent 0%,
+    rgba(0, 0, 0, 0.22) 48%,
+    rgba(0, 0, 0, 0.85) 78%,
+    #000000 100%
+  );
+  opacity: 1;
+  will-change: opacity;
+}
+
+.signature-video-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 1;
+  will-change: opacity;
+}
+
+.signature-intro-video {
+  width: min(82vw, 680px);
+  max-height: 55vh;
+  object-fit: contain;
+  filter: invert(1) grayscale(1) contrast(2.2) brightness(1.06);
+  pointer-events: none;
+  user-select: none;
+}
+
 /* ETEC MAS BACKGROUND LAYER (SURGE SUAVEMENTE DEPOIS QUE O VÍDEO FAZ FADE-OUT) */
 .etec-bg-container {
   position: fixed;
@@ -77,7 +128,9 @@
 }
 
 /* Page content sits comfortably above the video background */
-header, main, footer {
+header,
+main,
+footer {
   position: relative;
   z-index: 2;
 }
@@ -312,7 +365,10 @@ header, main, footer {
 }
 
 @media screen and (max-width: 900px) {
-  .nav-links { display: none; }
+  .nav-links {
+    display: none;
+  }
+
   .nav-links.is-open {
     display: flex;
     flex-direction: column;
@@ -325,7 +381,10 @@ header, main, footer {
     padding: 2.2rem;
     gap: 1.5rem;
   }
-  .nav-ham { display: block; }
+
+  .nav-ham {
+    display: block;
+  }
 }
 
 /* 3. HERO SECTION */
@@ -339,15 +398,16 @@ header, main, footer {
   justify-content: flex-start;
 }
 
-/* 1. PURE VIDEO STAGE (O vídeo do menino aparece 100% sozinho, sem texto algum) */
+/* 1. PURE VIDEO STAGE (Assinatura no fundo azul via scroll -> vídeo do menino na frente) */
 .hero-pure-stage {
   width: 100%;
-  height: 100vh;
-  min-height: 100vh;
+  height: 240vh;
+  min-height: 240vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  padding-top: calc(100vh - 5.5rem);
   padding-bottom: 2.8rem;
   position: relative;
   pointer-events: none;
@@ -363,9 +423,49 @@ header, main, footer {
   opacity: 0.85;
   pointer-events: auto;
   cursor: pointer;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease;
   animation: cuePulse 2.4s ease-in-out infinite;
   user-select: none;
+}
+
+.scroll-down-cue.is-hidden {
+  opacity: 0 !important;
+  pointer-events: none;
+  transform: translateY(12px);
+  animation: none;
+}
+
+/* ECHOMIND PROJECT LINK */
+.echomind-project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.echomind-project-link svg {
+  transition: transform 0.25s ease;
+}
+
+.echomind-project-link:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #060810;
+  transform: translateY(-1px);
+}
+
+.echomind-project-link:hover svg {
+  transform: translate(2px, -2px);
 }
 
 .scroll-cue-mouse {
@@ -398,18 +498,43 @@ header, main, footer {
 }
 
 @keyframes mouseScroll {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(9px); opacity: 0; }
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(9px);
+    opacity: 0;
+  }
 }
 
 @keyframes arrowBounce {
-  0%, 100% { transform: translateY(0) rotate(45deg); opacity: 0.4; }
-  50% { transform: translateY(4px) rotate(45deg); opacity: 0.95; }
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(45deg);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: translateY(4px) rotate(45deg);
+    opacity: 0.95;
+  }
 }
 
 @keyframes cuePulse {
-  0%, 100% { opacity: 0.7; transform: translateY(0); }
-  50% { opacity: 1; transform: translateY(-3px); }
+
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
 }
 
 /* 2. HERO CONTENT REVEAL (Surge suavemente quando o usuário abaixar a página) */
@@ -676,9 +801,11 @@ header, main, footer {
   .etec-highlight-box {
     grid-template-columns: 1fr;
   }
+
   .etec-highlight-media {
     min-height: 280px;
   }
+
   .etec-highlight-content {
     padding: 2.2rem;
   }
@@ -848,9 +975,11 @@ header, main, footer {
   .gallery-bento-grid {
     grid-template-columns: 1fr;
   }
+
   .gallery-photo-card.is-featured {
     min-height: 420px;
   }
+
   .gallery-split-row {
     grid-template-columns: 1fr;
   }
@@ -910,8 +1039,8 @@ header, main, footer {
   --scale: 1;
   transform: translate3d(var(--tx), var(--ty), 0) rotate(var(--rot)) scale(var(--scale));
   transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.4s ease,
-              border-color 0.4s ease;
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
   cursor: pointer;
   opacity: 1 !important;
   visibility: visible !important;
@@ -924,18 +1053,21 @@ header, main, footer {
   --rot: -6deg;
   z-index: 1;
 }
+
 .fan-card[data-index="2"] {
   --tx: -45px;
   --ty: 0px;
   --rot: -2deg;
   z-index: 2;
 }
+
 .fan-card[data-index="3"] {
   --tx: 45px;
   --ty: 0px;
   --rot: 2deg;
   z-index: 3;
 }
+
 .fan-card[data-index="4"] {
   --tx: 140px;
   --ty: 12px;
@@ -949,16 +1081,19 @@ header, main, footer {
   --ty: 0px;
   --rot: -5deg;
 }
+
 .cards-fan-wrapper:hover .fan-card[data-index="2"] {
   --tx: -165px;
   --ty: 0px;
   --rot: -1.5deg;
 }
+
 .cards-fan-wrapper:hover .fan-card[data-index="3"] {
   --tx: 165px;
   --ty: 0px;
   --rot: 1.5deg;
 }
+
 .cards-fan-wrapper:hover .fan-card[data-index="4"] {
   --tx: 490px;
   --ty: 0px;
@@ -1024,6 +1159,7 @@ header, main, footer {
     gap: 1.5rem;
     perspective: none;
   }
+
   .fan-card {
     position: static;
     width: 100%;
@@ -1031,9 +1167,11 @@ header, main, footer {
     min-height: 380px;
     transform: none !important;
   }
+
   .cards-fan-wrapper:hover .fan-card {
     transform: none !important;
   }
+
   .cards-fan-wrapper .fan-card:hover {
     transform: translateY(-6px) !important;
   }
@@ -1048,7 +1186,8 @@ header, main, footer {
 /* 6. MÉTODO COPENHAGEN — HORIZONTAL SCROLL ON VERTICAL WHEEL */
 .copenhagen-scroll-section {
   position: relative;
-  height: 420vh; /* Pista alongada para rolagem horizontal suave e sem correria */
+  height: 420vh;
+  /* Pista alongada para rolagem horizontal suave e sem correria */
   background: transparent;
 }
 
@@ -1185,17 +1324,22 @@ header, main, footer {
 }
 
 @media screen and (max-width: 800px) {
-  .copenhagen-scroll-section { height: auto; }
+  .copenhagen-scroll-section {
+    height: auto;
+  }
+
   .copenhagen-sticky-wrapper {
     position: static;
     height: auto;
     overflow: visible;
   }
+
   .copenhagen-track {
     overflow-x: auto;
     padding-bottom: 2rem;
     transform: none !important;
   }
+
   .copenhagen-card {
     width: 320px;
     min-width: 320px;
@@ -1212,7 +1356,9 @@ header, main, footer {
 }
 
 @media screen and (max-width: 850px) {
-  .split-cards { grid-template-columns: 1fr; }
+  .split-cards {
+    grid-template-columns: 1fr;
+  }
 }
 
 .split-card {
@@ -1319,8 +1465,8 @@ header, main, footer {
 .text-char {
   display: inline-block;
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-              color 0.22s ease,
-              text-shadow 0.22s ease;
+    color 0.22s ease,
+    text-shadow 0.22s ease;
   color: inherit;
   cursor: default;
   will-change: transform, color, text-shadow;
@@ -1429,7 +1575,9 @@ header, main, footer {
 }
 
 @media screen and (max-width: 800px) {
-  .footer-layout { grid-template-columns: 1fr; }
+  .footer-layout {
+    grid-template-columns: 1fr;
+  }
 }
 
 .footer-col-title {
@@ -1474,7 +1622,9 @@ header, main, footer {
    ============================================================ */
 
 /* Palavras-chaves em destaque branco puro luminoso */
-strong, b, .keyword-highlight {
+strong,
+b,
+.keyword-highlight {
   color: #ffffff !important;
   font-weight: 700;
   text-shadow: 0 0 14px rgba(255, 255, 255, 0.4), 0 0 28px rgba(180, 220, 255, 0.2);
@@ -1482,7 +1632,9 @@ strong, b, .keyword-highlight {
   transition: text-shadow 0.25s ease, color 0.25s ease;
 }
 
-strong:hover, b:hover, .keyword-highlight:hover {
+strong:hover,
+b:hover,
+.keyword-highlight:hover {
   text-shadow: 0 0 22px rgba(255, 255, 255, 0.8), 0 0 40px rgba(180, 220, 255, 0.5);
 }
 
@@ -1491,7 +1643,7 @@ strong:hover, b:hover, .keyword-highlight:hover {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
