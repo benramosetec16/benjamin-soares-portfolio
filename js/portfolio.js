@@ -18,21 +18,42 @@
 
     if (!sigBgLayer || !sigVideoLayer || !sigVideo) return;
 
+    var isSigMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth <= 850);
+
     sigVideo.muted = true;
     sigVideo.defaultMuted = true;
     sigVideo.playsInline = true;
     sigVideo.setAttribute('muted', '');
     sigVideo.setAttribute('playsinline', '');
     sigVideo.setAttribute('webkit-playsinline', '');
-    sigVideo.pause();
 
-    if (sigVideo.readyState === 0) {
-      sigVideo.load();
-    }
-
-    sigVideo.addEventListener('loadeddata', function () {
+    if (isSigMobile) {
+      // No celular: reproduz automaticamente sem precisar clicar em play (e para no último frame)
+      sigVideo.autoplay = true;
+      sigVideo.setAttribute('autoplay', '');
+      var sigPlayP = sigVideo.play();
+      if (sigPlayP !== undefined) {
+        sigPlayP.catch(function () {
+          var unlockSig = function () {
+            sigVideo.play().catch(function () { });
+          };
+          ['touchstart', 'scroll', 'pointerdown'].forEach(function (evt) {
+            window.addEventListener(evt, unlockSig, { once: true, passive: true });
+          });
+        });
+      }
+    } else {
       sigVideo.pause();
-    });
+      if (sigVideo.readyState === 0) {
+        sigVideo.load();
+      }
+      sigVideo.addEventListener('loadeddata', function () {
+        sigVideo.pause();
+        if (sigVideo.currentTime === 0) {
+          sigVideo.currentTime = 0.01;
+        }
+      });
+    }
 
     // Efeito de revelar o vídeo do menino por onde o mouse passa
     var targetX = window.innerWidth * 0.5;
@@ -78,8 +99,8 @@
       sigBgLayer.style.visibility = isVisible ? 'visible' : 'hidden';
       sigVideoLayer.style.visibility = isVisible ? 'visible' : 'hidden';
 
-      // 2. Scrubbing da assinatura sincronizado com o scroll (duração maior antes do vídeo do menino)
-      if (isVisible && sigVideo.duration && !isNaN(sigVideo.duration)) {
+      // 2. Scrubbing da assinatura sincronizado com o scroll no desktop (no celular roda automático)
+      if (!isSigMobile && isVisible && sigVideo.duration && !isNaN(sigVideo.duration)) {
         var scrubEnd = vh * 1.25;
         var sigProgress = Math.min(Math.max(scrollY / scrubEnd, 0), 1);
         var sigTargetTime = sigProgress * (sigVideo.duration - 0.04);

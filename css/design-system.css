@@ -54,13 +54,13 @@
   --color--pearl-surface: rgba(255, 255, 255, 0.06);
 
   /* RAFAEL ROSSETTI ACCENT TOKENS */
-  --color--lime: #ee482e;                   /* Rafael Rossetti signature vermilion */
-  --color--lime-off: #c13520;
-  --color--accent-dot: #ee482e;             /* Dot signature */
-  --color--gold-primary: #e5a93c;           /* Warm gold */
-  --color--gold-highlight: #ffd17a;
-  --color--gold-border: #f3c86a;
-  --color--gold-surface: rgba(229, 169, 60, 0.12);
+  --color--lime: #3b82f6;                   /* Blue accent principal */
+  --color--lime-off: #2563eb;
+  --color--accent-dot: #3b82f6;             /* Dot signature */
+  --color--gold-primary: #60a5fa;           /* Light blue */
+  --color--gold-highlight: #93c5fd;
+  --color--gold-border: #60a5fa;
+  --color--gold-surface: rgba(59, 130, 246, 0.12);
 
   /* ACCENT TOKENS (Chic & Platina) */
   --color--accent-pure: #ffffff;            /* Branco puro de alto contraste */
@@ -150,9 +150,9 @@ body {
 .font-body { font-family: var(--font-body); }
 .font-editorial { font-family: var(--font-editorial); }
 
-/* SIGNATURE RED DOT — pontuação removida conforme pedido do usuário */
+/* SIGNATURE RED DOT — pontuação vermelha como assinatura visual */
 .red-dot {
-  color: var(--color--text-primary, #f5f4ef);
+  color: var(--color--accent-dot, #ee482e);
   display: inline;
   font-weight: 800;
   transition: color 0.3s ease;
@@ -180,10 +180,10 @@ body {
 }
 
 .text-chic-accent {
-  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
+  background: linear-gradient(135deg, #60a5fa 0%, #38bdf8 50%, #22d3ee 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: #ffffff;
+  color: #60a5fa;
   display: inline-block;
   font-style: normal;
   font-weight: 800;
@@ -211,7 +211,7 @@ body {
   font-size: 0.74rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color--text-secondary);
+  color: var(--color--lime, #ee482e);
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -279,17 +279,18 @@ body {
   transform: translateY(-2px);
 }
 
-/* Primary Button (White / Platinum Chic) */
+/* Primary Button (Blue Chic) */
 .btn-w[data-theme="chic-white"] {
-  background-color: #f5f4ef;
-  color: #060810;
-  border-color: #f5f4ef;
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.12);
+  background-color: #3b82f6;
+  color: #ffffff;
+  border-color: #3b82f6;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
 }
 
 .btn-w[data-theme="chic-white"]:hover {
-  background-color: #ffffff;
-  box-shadow: 0 6px 30px rgba(255, 255, 255, 0.25);
+  background-color: #2563eb;
+  border-color: #2563eb;
+  box-shadow: 0 6px 30px rgba(59, 130, 246, 0.4);
 }
 
 /* Secondary Button (Glass & Hairline) */
